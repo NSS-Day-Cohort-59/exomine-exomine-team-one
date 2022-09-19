@@ -71,7 +71,6 @@ const database = {
     transientState: {}
 }
 
-
 export const getGovernors = () => {
     return database.governors.map(governor => ({ ...governor }))
 }
@@ -88,8 +87,9 @@ export const getFacilityMinerals = () => {
     return database.facilityMinerals.map(fm => ({ ...fm }))
 }
 
-
-
+export const getTransientState = () => {
+    return {...database.transientState}
+}
 
 export const setGovernors = (governorId) => {
     database.transientState.governorId = governorId
@@ -124,4 +124,3 @@ export const purchaseMineral = () => {
     // application can re-render and update state
     document.dispatchEvent(new CustomEvent("stateChanged"))
 }
-
