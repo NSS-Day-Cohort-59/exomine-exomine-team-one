@@ -72,6 +72,21 @@ const database = {
 }
 
 
+export const getGovernors = () => {
+    return database.governors.map(governor => ({ ...governor }))
+}
+export const getColonies = () => {
+    return database.colonies.map(colony => ({ ...colony }))
+}
+export const getFacilities = () => {
+    return database.facilities.map(f => ({ ...f }))
+}
+export const getMinerals = () => {
+    return database.minerals.map(min => ({ ...min }))
+}
+export const getFacilityMinerals = () => {
+    return database.facilityMinerals.map(fm => ({ ...fm }))
+}
 
 
 
@@ -86,9 +101,6 @@ export const setFacility = (facilityId) => {
     document.dispatchEvent(new CustomEvent("stateChanged"))
 }
 
-export const getFacilities = () => {
-    return database.facilities.map(f => ({ ...f }))
-}
 
 export const purchaseMineral = () => {
 
