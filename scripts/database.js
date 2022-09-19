@@ -91,15 +91,31 @@ export const getFacilityMinerals = () => {
 
 
 
-
-
-
-
-
-export const setFacility = (facilityId) => {
-    database.transientState.selectedFacility = facilityId
+export const setGovernors = (governorId) => {
+    database.transientState.governorId = governorId
     document.dispatchEvent(new CustomEvent("stateChanged"))
 }
+export const setColonies = (colonyId) => {
+    database.transientState.colonyId = colonyId
+    document.dispatchEvent(new CustomEvent("stateChanged"))
+}
+export const setFacility = (facilityId) => {
+    database.transientState.facilityId = facilityId
+    document.dispatchEvent(new CustomEvent("stateChanged"))
+}
+export const setMinerals = (mineralId) => {
+    database.transientState.mineralId = mineralId
+    document.dispatchEvent(new CustomEvent("stateChanged"))
+}
+
+
+
+
+
+
+
+
+
 
 
 export const purchaseMineral = () => {
