@@ -1,6 +1,7 @@
 import { Governors } from "./governors.js"
 import { Facilities } from "./facilities.js"
 import { Orders } from "./orders.js"
+import { PurchaseCart } from "./purchaseCart.js"
 
 //Add imports later to add in each empty space
 export const Exomine = () => {
@@ -20,7 +21,7 @@ export const Exomine = () => {
 
         </div>
         <div class="minerals_box" id="spaceCart-div">
-
+            ${ PurchaseCart() }
         </div>
     </section>`
 }

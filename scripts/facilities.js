@@ -2,11 +2,20 @@ import { getFacilities, getTransientState, setFacility } from "./database.js";
 
 const facilities = getFacilities()
 
+const governorChosen = () => {
+    const transientState = getTransientState()
+    if (!Object.keys(transientState).includes("governorId") || transientState.governorId === 0) {
+        return `disabled`
+    } else {
+        return ``
+    }
+}
+
 export const Facilities = () => {
     const currentId = getTransientState().facilityId
 
     let html = `<label for="facility-select">Facilities</label>
-    <select id="facility-select">
+    <select id="facility-select" ${governorChosen()}>
     <option value="0">Choose a Facility</option>`
 
     html += facilities.map(facility => {
