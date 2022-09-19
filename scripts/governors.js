@@ -1,4 +1,4 @@
-import { getGovernors, getTransientState, setGovernors } from "./database.js"
+import { getGovernors, getTransientState, setColonies, setGovernors } from "./database.js"
 
 const governors = getGovernors()
 
@@ -27,6 +27,10 @@ document.addEventListener(
     event => {
         if (event.target.id === "governors-select") {
             setGovernors(parseInt(event.target.value))
+            if (event.target.value !== "0") {
+                setColonies(governors.find(governor => governor.id === parseInt(event.target.value)).colonyId)
+            }
+            document.dispatchEvent(new CustomEvent("stateChanged"))
         }
     }
 )
