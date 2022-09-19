@@ -27,6 +27,7 @@ document.addEventListener(
     event => {
         if (event.target.id === "facility-select") {
             setFacility(parseInt(event.target.value))
+            document.dispatchEvent(new CustomEvent("stateChanged"))
         }
     }
 )
