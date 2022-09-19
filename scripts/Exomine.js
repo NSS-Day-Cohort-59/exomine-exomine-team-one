@@ -1,4 +1,5 @@
 import { Governors } from "./governors.js"
+import { Facilities } from "./facilities.js"
 
 //Add imports later to add in each empty space
 export const Exomine = () => {
@@ -7,7 +8,7 @@ export const Exomine = () => {
             ${ Governors() }
         </div>
         <div class="choices-div">
-
+            ${ Facilities() }
         </div>
     </section>
     <aside id="orders">
