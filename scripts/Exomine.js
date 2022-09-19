@@ -1,9 +1,10 @@
+import { Governors } from "./governors.js"
 
 //Add imports later to add in each empty space
 export const Exomine = () => {
     return `<section id="choices-section">
         <div class="choices-div">
-
+            ${ Governors() }
         </div>
         <div class="choices-div">
 
