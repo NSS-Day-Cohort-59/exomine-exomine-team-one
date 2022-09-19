@@ -1,17 +1,32 @@
-import { getGovernors } from "./database.js"
+import { getGovernors, getTransientState, setGovernors } from "./database.js"
 
 const governors = getGovernors()
 
 export const Governors = () => {
-    let html = `<label for="governor-select">Governors</label>
+    const currentId = getTransientState().governorId
+
+    let html = `<label for="governors-select">Governors</label>
     <select id="governors-select">
-    <option value="governor-0">Choose a governor</option>`
+    <option value="0">Choose a Governor</option>`
 
     html += governors.map(governor => {
         if (governor.active === true) {
-            return `<option value="${governor.id}">${governor.name}</option>`
+            if (governor.id === currentId) { // Keeps the current selection displayed when rendering HTML
+                return `<option value="${governor.id}" selected>${governor.name}</option>`
+            } else {
+                return `<option value="${governor.id}">${governor.name}</option>`
+            }
         }
     }).join("")
 
     return html += `</select>`
 }
+
+document.addEventListener(
+    "change",
+    event => {
+        if (event.target.id === "governors-select") {
+            setGovernors(parseInt(event.target.value))
+        }
+    }
+)
