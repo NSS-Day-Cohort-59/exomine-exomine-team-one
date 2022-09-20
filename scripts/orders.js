@@ -16,7 +16,7 @@ export const Orders = () => {
 
         html += purchases.map(purchase => {
             if (purchase.colonyId === transientState.colonyId) { // Only displays if the purchase is for that colony
-                return `<li>${purchase.amount} tons of ${minerals.find(mineral => mineral.id === purchase.facilityMineralId).name}</li>` // Will return an error until the purchase button is refactored 
+                return `<li>${purchase.amount} tons of ${minerals.find(mineral => mineral.id === purchase.mineralId).name}</li>` // Will return an error until the purchase button is refactored 
             }
         }).join("")
     }

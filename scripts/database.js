@@ -64,14 +64,8 @@ const database = {
         {
             id: 1,
             colonyId: 4,
-            facilityMineralId: 1,
+            mineralId: 1,
             amount: 4
-        },
-        {
-            id: 2,
-            colonyId: 4,
-            facilityMineralId: 3,
-            amount: 17
         }
     ],
     transientState: {}
@@ -130,6 +124,8 @@ export const purchaseMineral = () => {
     const lastIndex = database.purchasedMinerals.length - 1
     newPurchase.id = database.purchasedMinerals[lastIndex].id + 1
     newPurchase.amount = database.purchasedMinerals[lastIndex].amount + 1
+    const matchingMineral = database.facilityMinerals.find(mineral => mineral.id === newPurchase.facilityMineralId)
+    newPurchase.mineralId = matchingMineral.mineralId
     // newPurchase.amount += 1
     // database.facilityMinerals.amount -= 1
     database.purchasedMinerals.push(newPurchase)
