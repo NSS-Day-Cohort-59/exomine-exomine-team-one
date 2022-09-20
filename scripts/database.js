@@ -123,6 +123,6 @@ export const purchaseMineral = () => {
     newPurchase.amount += 1
     database.facilityMinerals.amount -= 1
     database.purchasedMinerals.push(newPurchase)
-    database.transientState = {}
+    delete database.transientState.mineralId
     document.dispatchEvent(new CustomEvent("stateChanged"))
 }
