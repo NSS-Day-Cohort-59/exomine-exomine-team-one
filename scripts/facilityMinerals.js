@@ -12,7 +12,7 @@ export const Minerals = () => {
         html = `<h2>${facilities.find(facility => facility.id === transientState.facilityId).name}</h2>` // Finds the matching facilityName based on the currently selected Facility
 
         html += facilityMinerals.map(facMin => {
-            if (facMin.facilityId === transientState.facilityId) {
+            if (facMin.facilityId === transientState.facilityId && facMin.amount > 0) {
                 const matchingMineral = minerals.find(mineral => mineral.id === facMin.mineralId)
                 return `<input type="radio" name="mineral" value="${facMin.id}"/>${facMin.amount} tons of ${matchingMineral.name}`
             }
