@@ -66,12 +66,6 @@ const database = {
             colonyId: 4,
             mineralId: 1,
             amount: 4
-        },
-        {
-            id: 2,
-            colonyId: 4,
-            mineralId: 3,
-            amount: 17
         }
     ],
     transientState: {}
@@ -121,13 +115,20 @@ export const setFacilityMinerals = (facilityMineralId) => {
     }
 */
 
-export const purchaseMineral = () => { 
+
+
+
+
+export const purchaseMineral = () => {
     const newPurchase = { ...database.transientState }
     const lastIndex = database.purchasedMinerals.length - 1
     newPurchase.id = database.purchasedMinerals[lastIndex].id + 1
-    newPurchase.amount += 1
-    database.facilityMinerals.amount -= 1
+    newPurchase.amount = database.purchasedMinerals[lastIndex].amount + 1
+    const matchingMineral = database.facilityMinerals.find(mineral => mineral.id === newPurchase.facilityMineralId)
+    newPurchase.mineralId = matchingMineral.mineralId
+    // newPurchase.amount += 1
+    // database.facilityMinerals.amount -= 1
     database.purchasedMinerals.push(newPurchase)
-    delete database.transientState.mineralId
+    delete database.transientState.facilityMineralId
     document.dispatchEvent(new CustomEvent("stateChanged"))
 }
