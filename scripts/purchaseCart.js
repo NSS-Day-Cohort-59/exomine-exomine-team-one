@@ -1,4 +1,4 @@
-import { getTransientState } from "./database.js"
+import { getTransientState, purchaseMineral } from "./database.js"
 
 export const PurchaseCart = () => {
     const transientState = getTransientState()
@@ -15,6 +15,7 @@ document.addEventListener(
     event => {
         if (event.target.name === "purchase-btn") {
             // Add code later to save purchase
+            purchaseMineral()
         }
     }
 )
