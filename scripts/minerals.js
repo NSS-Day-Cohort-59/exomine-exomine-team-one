@@ -32,16 +32,15 @@ document.addEventListener(
             setMinerals(parseInt(event.target.value))
 
             const transientState = getTransientState()
-            const facilityMinerals = getFacilityMinerals()
-            const [, mineralId] = event.target.innerHTML.split(" tons of ")
+            const facilityMinerals = getFacilityMinerals() // Gets the list of facility Minerals
 
-            const facMin = facilityMinerals.find(mineral => {
+            const facMin = facilityMinerals.find(mineral => { // Finds the current facilityMineral being accessed.
                 if (mineral.mineralId === parseInt(event.target.value) && mineral.facilityId === transientState.facilityId) {
                     return mineral
                 }
             })
 
-            const cartList = document.querySelector("#minerals-in-cart")
+            const cartList = document.querySelector("#minerals-in-cart") // Defines the HTML element we are changing.
             cartList.innerHTML = `<li>1 ton of ${minerals.find(mineral => mineral.id === facMin.mineralId).name} from ${facilities.find(facility => facility.id === facMin.facilityId).name}</li>`
         }
     }
