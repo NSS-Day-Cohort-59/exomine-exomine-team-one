@@ -2,7 +2,7 @@ import { Governors } from "./governors.js"
 import { Facilities } from "./facilities.js"
 import { Orders } from "./orders.js"
 import { PurchaseCart } from "./purchaseCart.js"
-import { Minerals } from "./minerals.js"
+import { Minerals } from "./facilityMinerals.js"
 
 
 

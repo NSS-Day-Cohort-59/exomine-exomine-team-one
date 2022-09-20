@@ -6,21 +6,17 @@ const facilities = getFacilities()
 export const Minerals = () => {
     const facilityMinerals = getFacilityMinerals()
     const transientState = getTransientState()
-    let html = "<h2>Facility Minerals</h2>"
-    
-    if (transientState.facilityId !== 0 && Object.keys(transientState).includes("facilityId")) {
-        html = `<h2>${facilities.find(facility => facility.id === transientState.facilityId).name}</h2>`
-        
-        for (const currentObject of facilityMinerals) {
-            if (currentObject.facilityId === transientState.facilityId) {
-                const matchingMineral = minerals.find(mineral => {
-                    if (mineral.id === currentObject.mineralId) {
-                        return mineral
-                    }
-                })
-                html += `<input type="radio" name="mineral" value="${matchingMineral.id}"/>${currentObject.amount} tons of ${matchingMineral.name}`
+    let html = "<h2>Facility Minerals</h2>" // Default HTML
+
+    if (transientState.facilityId !== 0 && Object.keys(transientState).includes("facilityId")) { // If facilityId is not defined, don't display anything but the original h2
+        html = `<h2>${facilities.find(facility => facility.id === transientState.facilityId).name}</h2>` // Finds the matching facilityName based on the currently selected Facility
+
+        html += facilityMinerals.map(facMin => {
+            if (facMin.facilityId === transientState.facilityId) {
+                const matchingMineral = minerals.find(mineral => mineral.id === facMin.mineralId)
             }
-        }
+        }).join("") // For each value of facilityMinerals, it runs the code inside, then joins the return values to a single string
+
     }
     return html
 }
@@ -34,11 +30,7 @@ document.addEventListener(
             const transientState = getTransientState()
             const facilityMinerals = getFacilityMinerals() // Gets the list of facility Minerals
 
-            const facMin = facilityMinerals.find(mineral => { // Finds the current facilityMineral being accessed.
-                if (mineral.mineralId === parseInt(event.target.value) && mineral.facilityId === transientState.facilityId) {
-                    return mineral
-                }
-            })
+            const facMin = facilityMinerals.find(mineral => mineral.id === parseInt(event.target.value)) // Finds the matching Facility Mineral
 
             const cartList = document.querySelector("#minerals-in-cart") // Defines the HTML element we are changing.
             cartList.innerHTML = `<li>1 ton of ${minerals.find(mineral => mineral.id === facMin.mineralId).name} from ${facilities.find(facility => facility.id === facMin.facilityId).name}</li>`

@@ -105,7 +105,9 @@ export const setFacility = (facilityId) => {
 export const setMinerals = (mineralId) => {
     database.transientState.mineralId = mineralId
 }
-
+export const setFacilityMinerals = (facilityMineralId) => {
+    database.transientState.facilityMineralId = facilityMineralId
+}
 
 
 
