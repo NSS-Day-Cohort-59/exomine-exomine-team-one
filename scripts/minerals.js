@@ -1,4 +1,4 @@
-import { getMinerals, getFacilityMinerals, getFacilities, getTransientState } from "./database.js";
+import { getMinerals, getFacilityMinerals, getFacilities, getTransientState, setMinerals } from "./database.js";
 
 const minerals = getMinerals()
 const facilityMinerals = getFacilityMinerals()
@@ -16,7 +16,7 @@ export const Minerals = () => {
                         return mineral
                     }
                 })
-                const matchingFacility = facilities.find(facility => facility.id === currentObject.facilityId)
+                // const matchingFacility = facilities.find(facility => facility.id === currentObject.facilityId)
                 html += `
             <input type="radio" name="mineral" value="${matchingMineral.id}"/>${currentObject.amount} tons of ${matchingMineral.name}`
             }
@@ -24,3 +24,13 @@ export const Minerals = () => {
     }
     return html
 }
+
+document.addEventListener(
+    "change",
+    (event) => {
+        if (event.target.name === "mineral") {
+            setMinerals(parseInt(event.target.value))
+
+        }
+    }
+)
