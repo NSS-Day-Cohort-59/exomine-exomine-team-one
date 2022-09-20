@@ -87,7 +87,7 @@ export const getFacilityMinerals = () => {
     return database.facilityMinerals.map(fm => ({ ...fm }))
 }
 export const getTransientState = () => {
-    return {...database.transientState}
+    return { ...database.transientState }
 }
 export const getPurchasedMinerals = () => {
     return database.purchasedMinerals.map(purchase => ({ ...purchase }))
@@ -117,8 +117,12 @@ export const setMinerals = (mineralId) => {
 
 
 export const purchaseMineral = () => {
-
-    // Broadcast custom event to entire documement so that the
-    // application can re-render and update state
+    const newPurchase = { ...database.transientState }
+    const lastIndex = database.purchasedMinerals.length - 1
+    newPurchase.id = database.purchasedMinerals[lastIndex].id + 1
+    newPurchase.amount += 1
+    database.facilityMinerals.amount -= 1
+    database.purchasedMinerals.push(newPurchase)
+    database.transientState = {}
     document.dispatchEvent(new CustomEvent("stateChanged"))
 }
