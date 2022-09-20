@@ -63,9 +63,15 @@ const database = {
     purchasedMinerals: [
         {
             id: 1,
-            colonyId: 1,
+            colonyId: 4,
             mineralId: 1,
-            amount: 1
+            amount: 4
+        },
+        {
+            id: 2,
+            colonyId: 4,
+            mineralId: 3,
+            amount: 17
         }
     ],
     transientState: {}
@@ -102,23 +108,20 @@ export const setColonies = (colonyId) => {
 export const setFacility = (facilityId) => {
     database.transientState.facilityId = facilityId
 }
-export const setMinerals = (mineralId) => {
-    database.transientState.mineralId = mineralId
-}
 export const setFacilityMinerals = (facilityMineralId) => {
     database.transientState.facilityMineralId = facilityMineralId
 }
 
+/* Current transientState when its passed into purchaseMineral():
+    transientState: {
+        colonyId: 4
+        facilityId: 1
+        facilityMineralId: 1
+        governorId: 1
+    }
+*/
 
-
-
-
-
-
-
-
-
-export const purchaseMineral = () => {
+export const purchaseMineral = () => { 
     const newPurchase = { ...database.transientState }
     const lastIndex = database.purchasedMinerals.length - 1
     newPurchase.id = database.purchasedMinerals[lastIndex].id + 1

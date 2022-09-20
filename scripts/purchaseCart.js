@@ -14,8 +14,7 @@ document.addEventListener(
     "click",
     event => {
         if (event.target.name === "purchase-btn") {
-            // Add code later to save purchase
-            purchaseMineral()
+            purchaseMineral() // Last function in database
         }
     }
 )
