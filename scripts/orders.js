@@ -10,23 +10,15 @@ export const Orders = () => {
     let html = `<h2>Colony Minerals</h2>
     <ul>`
 
-    if (Object.keys(transientState).includes("governorId") && transientState.governorId !== 0) { // Displays the orders for the selected governor's colony
-        html = `<h2>${colonies.find(colony => colony.id === transientState.colonyId).planetName} Minerals</h2>
-        <ul>`
+    if (Object.keys(transientState).includes("governorId") && transientState.governorId !== 0) { // Checks if a valid governor is selected
+        html = `<h2>${colonies.find(colony => colony.id === transientState.colonyId).planetName} Minerals</h2> 
+        <ul id="purchases">` // Creates the unique colony header
 
-        foundAmount = purchases.map(purchase => {
-            if (purchase.colonyId === transientState.colonyId) {
-                return purchase
+        html += purchases.map(purchase => {
+            if (purchase.colonyId === transientState.colonyId) { // Only displays if the purchase is for that colony
+                return `<li>${purchase.amount} tons of ${minerals.find(mineral => mineral.id === purchase.facilityMineralId).name}</li>` // Will return an error until the purchase button is refactored 
             }
         }).join("")
     }
-    return `<li class="purchases-li">${purchase.amount} tons of ${minerals.find(mineral => mineral.id === purchase.mineralId).name}</li>`
-    //     html += purchases.map(purchase => {
-    //         if (purchase.colonyId === transientState.colonyId) {
-    //             return `<li class="purchases-li">${purchase.amount} tons of ${minerals.find(mineral => mineral.id === purchase.mineralId).name}</li>`
-    //         }
-    //     }).join("")
-    // }
-
     return html += `</ul>`
 }
