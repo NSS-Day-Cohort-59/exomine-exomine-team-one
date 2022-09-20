@@ -65,7 +65,7 @@ const database = {
             id: 1,
             colonyId: 1,
             mineralId: 1,
-            amount: 1
+            amount: 0
         }
     ],
     transientState: {}
@@ -120,8 +120,9 @@ export const purchaseMineral = () => {
     const newPurchase = { ...database.transientState }
     const lastIndex = database.purchasedMinerals.length - 1
     newPurchase.id = database.purchasedMinerals[lastIndex].id + 1
-    newPurchase.amount += 1
-    database.facilityMinerals.amount -= 1
+    newPurchase.amount = database.purchasedMinerals[lastIndex].amount + 1
+    // newPurchase.amount += 1
+    // database.facilityMinerals.amount -= 1
     database.purchasedMinerals.push(newPurchase)
     delete database.transientState.mineralId
     document.dispatchEvent(new CustomEvent("stateChanged"))

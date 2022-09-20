@@ -14,12 +14,18 @@ export const Orders = () => {
         html = `<h2>${colonies.find(colony => colony.id === transientState.colonyId).planetName} Minerals</h2>
         <ul>`
 
-        html += purchases.map(purchase => {
+        foundAmount = purchases.map(purchase => {
             if (purchase.colonyId === transientState.colonyId) {
                 return `<li class="purchases-li">${purchase.amount} tons of ${minerals.find(mineral => mineral.id === purchase.mineralId).name}</li>`
             }
         }).join("")
     }
-    
+    //     html += purchases.map(purchase => {
+    //         if (purchase.colonyId === transientState.colonyId) {
+    //             return `<li class="purchases-li">${purchase.amount} tons of ${minerals.find(mineral => mineral.id === purchase.mineralId).name}</li>`
+    //         }
+    //     }).join("")
+    // }
+
     return html += `</ul>`
 }
