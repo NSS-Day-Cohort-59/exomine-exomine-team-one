@@ -8,15 +8,15 @@ export const Orders = () => {
     const transientState = getTransientState()
 
     let html = `<h2>Colony Minerals</h2>
-    <ul>`
+    <ul id="purchases">`
 
     if (Object.keys(transientState).includes("governorId") && transientState.governorId !== 0) { // Displays the orders for the selected governor's colony
         html = `<h2>${colonies.find(colony => colony.id === transientState.colonyId).planetName} Minerals</h2>
-        <ul>`
+        <ul id="purchases">`
 
         foundAmount = purchases.map(purchase => {
             if (purchase.colonyId === transientState.colonyId) {
-                return `<li class="purchases-li">${purchase.amount} tons of ${minerals.find(mineral => mineral.id === purchase.mineralId).name}</li>`
+                return `<li>${purchase.amount} tons of ${minerals.find(mineral => mineral.id === purchase.mineralId).name}</li>`
             }
         }).join("")
     }
