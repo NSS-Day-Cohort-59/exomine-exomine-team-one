@@ -24,7 +24,7 @@ export const Exomine = () => {
         <div class="minerals_box" id="minerals-div">
         ${Minerals()}
         </div>
-        <div class="minerals_box" id="spaceCart-div">
+        <div class="purchase_box" id="spaceCart-div">
         ${PurchaseCart()}
         </div>
         </section>`
