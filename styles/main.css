@@ -18,7 +18,7 @@ html {
     float: right;
     flex-basis: 24%;
     margin: 0 2rem;
-    border: 2px dashed rgb(236, 233, 14);
+    border: 2px dashed rgb(24, 211, 18);
     border-radius: 0.5rem;
     box-shadow: 0.25rem 0.25rem 0.5rem rgb(143, 143, 143);
     background-color: rgba(7, 11, 31, 0.945);
@@ -34,14 +34,13 @@ html {
     margin-top: -1rem;
 }
 
-#purchases > li {
+#purchases>li {
     margin-left: -2rem;
 }
 
-#orders > h2 {
-    width: 100%;
+#orders>h2 {
+    width: 400px;
     text-align: center;
-    height: fit-content;
 }
 
 header {
@@ -50,13 +49,14 @@ header {
     height: 130px;
     display: flex;
     justify-content: center;
-
+    margin-bottom: 75px;
 
 }
 
 .header-h1 {
     margin-top: 40px;
-    font-size: 40px;
+    font-size: 60px;
+
 
 }
 
@@ -70,8 +70,9 @@ header {
     margin: 20px;
     margin-left: 20px;
     background-color: rgba(7, 11, 31, 0.945);
-    width: 350px;
-    height: 60px;
+    width: 500px;
+    height: 80px;
+    margin-left: 200px;
 }
 
 option {
@@ -106,7 +107,7 @@ select {
 }
 
 .minerals_box {
-    /* flex-basis: 24%; */
+
     margin: 0 2rem;
     border: 2px dashed rgb(236, 233, 14);
     padding: 1rem;
@@ -115,27 +116,34 @@ select {
     background-color: rgba(7, 11, 31, 0.945);
     width: 800px;
     height: 150px;
-    /* display: flex;
-    justify-content: space-around;
-    flex-direction: column; */
     text-align: center;
+    margin-top: 150px;
+    margin-left: 200px;
+
 }
 
 .purchase_box {
-    /* flex-basis: 24%; */
+
     margin: 0 2rem;
-    border: 2px dashed rgb(16, 185, 25);
+    border: 2px dashed rgb(236, 233, 14);
     padding: 1rem;
     border-radius: 0.5rem;
     box-shadow: 0.25rem 0.25rem 0.5rem rgb(143, 143, 143);
-    /* margin: 20px;
-    margin-left: 20px; */
     background-color: rgba(7, 11, 31, 0.945);
     height: 150px;
-    width: 400px;
+    width: 450px;
     text-align: center;
+    margin-top: 150px;
+    margin-left: 100px;
 }
 
 input {
     margin: 10px;
+}
+
+button {
+    background-color: rgb(11, 236, 11);
+    color: rgb(12, 12, 12);
+    height: 40px;
+    font-size: 20px;
 }
