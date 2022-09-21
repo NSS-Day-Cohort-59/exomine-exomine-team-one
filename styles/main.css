@@ -4,7 +4,7 @@
 }
 
 body {
-    background-image: url("/images/body.jpeg");
+    background-image: url("/images/body1.jpeg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100% 100%;
@@ -28,5 +28,43 @@ header {
 .header-h1 {
     margin-top: 40px;
     font-size: 40px;
+
+}
+
+.choices-div {
+    flex-basis: 24%;
+    margin: 0 2rem;
+    border: 2px dashed rgb(236, 233, 14);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0.25rem 0.25rem 0.5rem rgb(143, 143, 143);
+    margin: 20px;
+    margin-left: 20px;
+    background-color: rgba(7, 11, 31, 0.945);
+    width: 350px;
+    height: 60px;
+}
+
+option {
+    font-size: 25px;
+    background-color: black;
+    color: rgb(224, 221, 16);
+    margin: 4px;
+}
+
+label {
+    font-size: 30px;
+    margin-right: 20px;
+}
+
+select {
+    /* color: rgb(10, 10, 10);
+    background-color: rgb(252, 245, 245); */
+    width: 170px;
+    height: 23px;
+    font-weight: bold;
+    font-size: 15px;
+    background-color: black;
+    color: rgb(224, 221, 16);
 
 }
