@@ -1,9 +1,4 @@
-#minerals-in-cart,
-#purchases {
-    list-style: none;
-}
-
-body {
+html {
     background-image: url("/images/body1.jpeg");
     background-position: center;
     background-repeat: no-repeat;
@@ -13,6 +8,40 @@ body {
     margin: 0;
 
 
+}
+
+#container {
+    width: 75%;
+}
+
+#orders {
+    float: right;
+    flex-basis: 24%;
+    margin: 0 2rem;
+    border: 2px dashed rgb(236, 233, 14);
+    border-radius: 0.5rem;
+    box-shadow: 0.25rem 0.25rem 0.5rem rgb(143, 143, 143);
+    background-color: rgba(7, 11, 31, 0.945);
+    width: 350px;
+    height: auto;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+
+#purchases {
+    margin-top: -1rem;
+}
+
+#purchases > li {
+    margin-left: -2rem;
+}
+
+#orders > h2 {
+    width: 100%;
+    text-align: center;
+    height: fit-content;
 }
 
 header {
