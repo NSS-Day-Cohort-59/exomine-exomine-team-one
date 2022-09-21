@@ -22,10 +22,10 @@ export const Exomine = () => {
     </aside>
     <section id="minerals-section">
         <div class="minerals_box" id="minerals-div">
-            ${Minerals()}
+        ${Minerals()}
         </div>
         <div class="minerals_box" id="spaceCart-div">
-            ${PurchaseCart()}
+        ${PurchaseCart()}
         </div>
-    </section>`
+        </section>`
 }
