@@ -8,7 +8,7 @@ export const Orders = () => {
     const transientState = getTransientState()
 
     let html = `<h2>Colony Minerals</h2>
-    <ul id="purchases">`
+    <ul>`
 
     if (Object.keys(transientState).includes("governorId") && transientState.governorId !== 0) { // Checks if a valid governor is selected
         html = `<h2>${colonies.find(colony => colony.id === transientState.colonyId).planetName} Minerals</h2> 
@@ -20,6 +20,5 @@ export const Orders = () => {
             }
         }).join("")
     }
-    
     return html += `</ul>`
 }
