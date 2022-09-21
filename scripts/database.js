@@ -104,19 +104,17 @@ export const setColonies = (colonyId) => {
 export const setFacility = (facilityId) => {
     database.transientState.facilityId = facilityId
 }
+
+//! Checks the database's array to see if the current facility already has a mineral chosen. If it does, it replaces it. If not, it just adds it to the array.
 export const setFacilityMinerals = (facilityMineralId) => {
-    const currentMineralIds = new Set() // Creates a new Set that will store the facility Ids from each facilityMineralId selected
+    const currentMineralIds = database.transientState.facilityMineralIds // Stores the array of facilityMineralIds for shortened code.
     
-    database.transientState.facilityMineralIds.forEach(mineralId => { // Fills the set with each currently selected facilityMineralId's facilityId 
-        currentMineralIds.add(database.facilityMinerals.find(mineral => mineral.id === mineralId).facilityId)
-    })
-    
-    if (!currentMineralIds.has(database.facilityMinerals.find(mineral => mineral.id === facilityMineralId).facilityId)) { // If the set doesn't include the facilityId from our new mineral, 
-        database.transientState.facilityMineralIds.push(facilityMineralId)                                                     // it will add it to the database.
+    if (!currentMineralIds.includes(database.facilityMinerals.find(mineral => mineral.id === facilityMineralId).facilityId)) { // Pushes ID when facility does not have mineral chosen yet. 
+        currentMineralIds.push(facilityMineralId)                                                                                 
         console.log('New One Created.')
-    } else { // Otherwise, it will replace it.
-        const index = [...currentMineralIds].indexOf(database.facilityMinerals.find(mineral => mineral.id === facilityMineralId).facilityId) // Converts the set to an array, then finds the index
-        database.transientState.facilityMineralIds[index] = facilityMineralId // Replaces the value of that facility's mineral in the database, at the index we defined
+    } else {
+        const index = currentMineralIds.indexOf(database.facilityMinerals.find(mineral => mineral.id === facilityMineralId).facilityId) // Finds the spot where the new ID should replace
+        currentMineralIds[index] = facilityMineralId // Replaces the value of the current facility's facilityMineralId
         console.log('Id Replaced.')
     }
 }
