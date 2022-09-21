@@ -9,7 +9,10 @@ import { Minerals } from "./facilityMinerals.js"
 
 //Add imports later to add in each empty space
 export const Exomine = () => {
-    return `<section id="choices-section">
+    return `<aside id="orders">
+            ${Orders()}
+    </aside>
+    <section id="choices-section">
         <div class="choices-div">
             ${Governors()}
         </div>
@@ -17,9 +20,6 @@ export const Exomine = () => {
             ${Facilities()}
         </div>
     </section>
-    <aside id="orders">
-            ${Orders()}
-    </aside>
     <section id="minerals-section">
         <div class="minerals_box" id="minerals-div">
         ${Minerals()}
