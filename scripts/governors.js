@@ -13,6 +13,7 @@ export const Governors = () => {
         if (governor.active === true) {
             if (governor.id === currentId) { // Keeps the current selection displayed when rendering HTML
                 return `<option value="${governor.id}" selected>${governor.name}</option>`
+
             } else {
                 return `<option value="${governor.id}">${governor.name}</option>`
             }
@@ -32,6 +33,7 @@ document.addEventListener(
             } else {
                 setFacility(0)
             }
+
             document.dispatchEvent(new CustomEvent("stateChanged"))
         }
     }
