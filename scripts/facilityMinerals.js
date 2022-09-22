@@ -26,12 +26,7 @@ document.addEventListener(
     (event) => {
         if (event.target.name === "mineral") {
             setFacilityMinerals(parseInt(event.target.value)) // Sets the facilityMineral ID in transientState 
-            const facilityMinerals = getFacilityMinerals() // Defined here so it stays updated
-
-            const facMin = facilityMinerals.find(mineral => mineral.id === parseInt(event.target.value))
-
-            const cartList = document.querySelector("#minerals-in-cart") // Defines the HTML element we are changing.
-            cartList.innerHTML = `<li>1 ton of ${minerals.find(mineral => mineral.id === facMin.mineralId).name} from ${facilities.find(facility => facility.id === facMin.facilityId).name}</li>`
         }
+        document.dispatchEvent(new CustomEvent("stateChanged"))
     }
 )

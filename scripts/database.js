@@ -50,7 +50,6 @@ const database = {
         { id: 8, facilityId: 4, mineralId: 1, amount: 150 },
         { id: 9, facilityId: 4, mineralId: 2, amount: 200 },
         { id: 10, facilityId: 4, mineralId: 3, amount: 300 },
-        { id: 11, facilityId: 1, mineralId: 4, amount: 220 },
         { id: 12, facilityId: 5, mineralId: 1, amount: 550 },
         { id: 13, facilityId: 5, mineralId: 4, amount: 800 },
         { id: 14, facilityId: 6, mineralId: 2, amount: 200 },
@@ -113,11 +112,9 @@ export const setFacilityMinerals = (facilityMineralId) => {
     
     if (!currentMineralIds.has(database.facilityMinerals.find(mineral => mineral.id === facilityMineralId).facilityId)) { // If the set doesn't include the facilityId from our new mineral, 
         database.transientState.facilityMineralIds.push(facilityMineralId)                                                     // it will add it to the database.
-        console.log('New One Created.')
     } else { // Otherwise, it will replace it.
         const index = [...currentMineralIds].indexOf(database.facilityMinerals.find(mineral => mineral.id === facilityMineralId).facilityId) // Converts the set to an array, then finds the index
         database.transientState.facilityMineralIds[index] = facilityMineralId // Replaces the value of that facility's mineral in the database, at the index we defined
-        console.log('Id Replaced.')
     }
 }
 
@@ -165,6 +162,7 @@ export const purchaseMineral = () => {
         delete database.transientState.facilityMineralId
 
         // Dispatch Custom Event to render new HTML
+        clearCart()
         document.dispatchEvent(new CustomEvent("stateChanged"))
     }
 }
