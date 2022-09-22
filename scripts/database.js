@@ -106,11 +106,11 @@ export const setFacility = (facilityId) => {
 }
 export const setFacilityMinerals = (facilityMineralId) => {
     const currentMineralIds = new Set() // Creates a new Set that will store the facility Ids from each facilityMineralId selected
-    
+
     database.transientState.facilityMineralIds.forEach(mineralId => { // Fills the set with each currently selected facilityMineralId's facilityId 
         currentMineralIds.add(database.facilityMinerals.find(mineral => mineral.id === mineralId).facilityId)
     })
-    
+
     if (!currentMineralIds.has(database.facilityMinerals.find(mineral => mineral.id === facilityMineralId).facilityId)) { // If the set doesn't include the facilityId from our new mineral, 
         database.transientState.facilityMineralIds.push(facilityMineralId)                                                     // it will add it to the database.
         console.log('New One Created.')
@@ -122,12 +122,12 @@ export const setFacilityMinerals = (facilityMineralId) => {
 }
 
 export const purchaseMineral = () => {
-    if (database.transientState.facilityMineralId) { // Only runs if a mineral is chosen
+    if (database.transientState.facilityMineralIds.length > 0) { // Only runs if a mineral is chosen
         // Create a const that is a spread copy of transientState
         const newOrder = { ...database.transientState }
 
         // Create const for matching facilityMineral, so we can access all the data we need
-        const facMin = database.facilityMinerals.find(facMin => facMin.id === newOrder.facilityMineralId)
+        const facMin = database.facilityMinerals.find(facMin => facMin.id === newOrder.facilityMineralIds.find(fmId => fmId))
 
         // Finds an existing order for the specified colony & mineral
         const matchingPurchase = database.purchasedMinerals.find(purchase => {
@@ -150,7 +150,7 @@ export const purchaseMineral = () => {
 
             // Delete the extra keys
             delete newOrder.facilityId
-            delete newOrder.facilityMineralId
+            delete newOrder.facilityMineralIds
             delete newOrder.governorId
 
             // Push the order to the database
@@ -162,7 +162,7 @@ export const purchaseMineral = () => {
         }
 
         // Remove the facilityMineralId from transientState
-        delete database.transientState.facilityMineralId
+        database.transientState.facilityMineralIds = []
 
         // Dispatch Custom Event to render new HTML
         document.dispatchEvent(new CustomEvent("stateChanged"))

@@ -14,8 +14,14 @@ export const Minerals = () => {
         html += facilityMinerals.map(facMin => {
             if (facMin.facilityId === transientState.facilityId && facMin.amount > 0) {
                 const matchingMineral = minerals.find(mineral => mineral.id === facMin.mineralId)
-                return `<input type="radio" name="mineral" value="${facMin.id}"/>${facMin.amount} tons of ${matchingMineral.name}`
+                let input = `<input type="radio" name="mineral" value="${facMin.id}"`
+                if (transientState.facilityMineralIds.includes(facMin.id)) {
+                    return input += `checked/>${facMin.amount} tons of ${matchingMineral.name}`
+                } else {
+                    return input += `/>${facMin.amount} tons of ${matchingMineral.name}`
+                }
             }
+
         }).join("") // For each value of facilityMinerals, it runs the code inside, then joins the return values to a single string
     }
     return html
