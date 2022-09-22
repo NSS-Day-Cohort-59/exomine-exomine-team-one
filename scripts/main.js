@@ -10,7 +10,6 @@ renderHTML()
 document.addEventListener(
     "stateChanged",
     event => {
-        console.log(`State changed. Refreshing all HTML...`)
         renderHTML()
     }
 )

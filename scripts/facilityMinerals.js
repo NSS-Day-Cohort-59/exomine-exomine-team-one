@@ -32,7 +32,7 @@ document.addEventListener(
     (event) => {
         if (event.target.name === "mineral") {
             setFacilityMinerals(parseInt(event.target.value)) // Sets the facilityMineral ID in transientState 
+            document.dispatchEvent(new CustomEvent("stateChanged"))
         }
-        document.dispatchEvent(new CustomEvent("stateChanged"))
     }
 )

@@ -96,9 +96,11 @@ export const getPurchasedMinerals = () => {
 
 export const setGovernors = (governorId) => {
     database.transientState.governorId = governorId
+    database.transientState.facilityMineralIds = []
 }
 export const setColonies = (colonyId) => {
     database.transientState.colonyId = colonyId
+    database.transientState.facilityMineralIds = []
 }
 export const setFacility = (facilityId) => {
     database.transientState.facilityId = facilityId
@@ -121,48 +123,54 @@ export const setFacilityMinerals = (facilityMineralId) => {
 export const purchaseMineral = () => {
     if (database.transientState.facilityMineralIds.length > 0) { // Only runs if a mineral is chosen
         // Create a const that is a spread copy of transientState
-        const newOrder = { ...database.transientState }
+        let newOrder = { ...database.transientState }
 
-        // Create const for matching facilityMineral, so we can access all the data we need
-        const facMin = database.facilityMinerals.find(facMin => facMin.id === newOrder.facilityMineralIds.find(fmId => fmId))
+        //! Iterate through the array to call the code on each ID 
+        for (const ID of database.transientState.facilityMineralIds) {
 
-        // Finds an existing order for the specified colony & mineral
-        const matchingPurchase = database.purchasedMinerals.find(purchase => {
-            if (purchase.mineralId === facMin.mineralId && purchase.colonyId === newOrder.colonyId) {
-                return purchase
+            // Create const for matching facilityMineral, so we can access all the data we need
+            const facMin = database.facilityMinerals.find(facMin => facMin.id === ID)
+
+            // Finds an existing order for the specified colony & mineral
+            const matchingPurchase = database.purchasedMinerals.find(purchase => {
+                if (purchase.mineralId === facMin.mineralId && purchase.colonyId === newOrder.colonyId) {
+                    return purchase
+                }
+            })
+
+            if (!matchingPurchase) { // Only runs if there is not an existing order
+                //Create a unique ID for each *NEW* order
+                const newId = database.purchasedMinerals.at(-1).id + 1
+                newOrder.id = newId
+
+                // Add the mineral ID and amount (Always 1 for a new order)
+                newOrder.mineralId = facMin.mineralId
+                newOrder.amount = 1
+
+                // Subtract 1 from the factoryMineral
+                facMin.amount--
+
+                // Delete the extra keys
+                delete newOrder.facilityId
+                delete newOrder.facilityMineralIds
+                delete newOrder.governorId
+
+                // Push the order to the database
+                database.purchasedMinerals.push(newOrder)
+            } else {
+                // Add 1 to the order. Subtract one from the factoryMineral
+                matchingPurchase.amount++
+                facMin.amount--
             }
-        })
 
-        if (!matchingPurchase) { // Only runs if there is not an existing order
-            //Create a unique ID for each *NEW* order
-            const newId = database.purchasedMinerals.at(-1).id + 1
-            newOrder.id = newId
+            // Remove the facilityMineralId from transientState
+            database.transientState.facilityMineralIds = []
 
-            // Add the mineral ID and amount (Always 1 for a new order)
-            newOrder.mineralId = facMin.mineralId
-            newOrder.amount = 1
-
-            // Subtract 1 from the factoryMineral
-            facMin.amount--
-
-            // Delete the extra keys
-            delete newOrder.facilityId
-            delete newOrder.facilityMineralIds
-            delete newOrder.governorId
-
-            // Push the order to the database
-            database.purchasedMinerals.push(newOrder)
-        } else {
-            // Add 1 to the order. Subtract one from the factoryMineral
-            matchingPurchase.amount++
-            facMin.amount--
+            // Reset newOrder for the next order
+            newOrder = { ...database.transientState }
         }
-
-        // Remove the facilityMineralId from transientState
-        database.transientState.facilityMineralIds = []
-
+        
         // Dispatch Custom Event to render new HTML
-        clearCart()
         document.dispatchEvent(new CustomEvent("stateChanged"))
     }
 }
